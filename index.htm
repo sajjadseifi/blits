@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catche Blit</title>
+    <link rel="stylesheet" href="styles/nav.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <main>
+      <header class="site__header">
+        <h1 class="brand">
+          <img
+            style="margin: 0 10px"
+            src="./assets/images/bus-ico.png"
+            width="60"
+            height="auto"
+          />
+          خرید<span class="brand--point">بلیت</span>
+        </h1>
+        <nav>
+          <ul class="menu">
+            <li id="logout-nv" class="link-nav">
+              <a href="/logout.htm">خروج</a>
+            </li>
+            <li id="auth-nv" class="link-nav">
+              <a style="font-size: 20px" href="/login.htm">
+                <span style="color: crimson">ثبت نام</span>
+                <span style="padding: 0 10px">|</span>
+                <span style="color: chartreuse">ورود</span>
+              </a>
+            </li>
+            <li id="admin-panel-nv" class="link-nav">
+              <a href="/admin.htm">پنل</a>
+            </li>
+            <li><a href="/blits.htm">بلیت‌های من</a></li>
+            <li><a class="active" href="/index.htm">خانه</a></li>
+          </ul>
+        </nav>
+      </header>
+    </main>
+
+    <div class="top-content">
+      <div class="topimg">
+        <img src="./assets/images/awaydays-logo-bus-13.webp" />
+      </div>
+      <h1 class="base-title">خرید بلیت اتوبوس با قیمت کم</h1>
+    </div>
+    <div class="container">
+      <form onsubmit="return false">
+        <h5
+          class="input-title"
+          style="text-align: right; padding: 20px 0; font-size: 20px"
+        >
+          ایستگاه مسیر رفت را انتخاب کنید.
+        </h5>
+        <div class="select">
+          <select onchange="loadSits()" name="format" id="source">
+            <option selected value="استاد معین">استاد معین</option>
+            <option value="شرق">شرق</option>
+            <option value="یافت اباد">یافت اباد</option>
+            <option value="فردوس">فردوس</option>
+            <option value="گلشهر">گلشهر</option>
+            <option value="پل ارتش">پل ارتش</option>
+            <option value="ارم">ارم</option>
+            <option value="ماهشت">ماهشت</option>
+            <option value="شهریار">شهریار</option>
+            <option value="سه راه اندیشه">سه راه اندیشه</option>
+            <option value="قزوین">قزوین</option>
+            <option value="کرج">کرج</option>
+          </select>
+        </div>
+        <h5
+          class="input-title"
+          style="text-align: right; padding: 20px 0; font-size: 20px"
+        >
+          ایستگاه مسیر برگشت را انتخاب کنید.
+        </h5>
+        <div class="select">
+          <select onchange="loadSits()" name="format" id="target">
+            <option selected value="استاد معین">استاد معین</option>
+            <option value="شرق">شرق</option>
+            <option value="یافت اباد">یافت اباد</option>
+            <option value="فردوس">فردوس</option>
+            <option value="گلشهر">گلشهر</option>
+            <option value="پل ارتش">پل ارتش</option>
+            <option value="ارم">ارم</option>
+            <option value="ماهشت">ماهشت</option>
+            <option value="شهریار">شهریار</option>
+            <option value="سه راه اندیشه">سه راه اندیشه</option>
+            <option value="قزوین">قزوین</option>
+            <option value="کرج">کرج</option>
+          </select>
+        </div>
+        <h5
+          class="input-title"
+          style="text-align: right; padding: 20px 0; font-size: 20px"
+        >
+          تاریخ شروع حرکت
+        </h5>
+        <label class="custom-field two">
+          <input
+            onchange="loadSits()"
+            type="date"
+            id="date"
+            placeholder="&nbsp;"
+          />
+        </label>
+        <h5
+          class="input-title"
+          style="text-align: right; padding: 20px 0; font-size: 20px"
+        >
+          ساعت شروع حرکت
+        </h5>
+        <div class="select">
+          <select onchange="loadSits()" name="format" id="datetime">
+            <option value="13:30:00">13:30</option>
+            <option value="15:30:00">15:30</option>
+            <option value="17:30:00">17:30</option>
+          </select>
+        </div>
+        <h5
+          class="input-title"
+          style="text-align: right; padding: 20px 0; font-size: 20px"
+        >
+          شماره صندلی
+        </h5>
+        <div class="sit-hint" style="text-align: right">
+          <h4 style="color: chartreuse">رنگ سبز جایگاه نشستن خانوم هاست</h4>
+          <h4 style="color: cornflowerblue">رنگ آبی جایگاه نشستن آقان است</h4>
+          <h4 style="color: #ccc">صندلی های خاکستری قابل رزرو</h4>
+        </div>
+        <div class="bus-sel-sit">
+          <ul id="bus" class="sit-group">
+            <div class="boxsit">
+              <li sit="1" class="free">1</li>
+              <li sit="1" class="w">2</li>
+              <li sit="1" class="m">3</li>
+              <li sit="1" class="free">4</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="free">5</li>
+              <li sit="1" class="w">6</li>
+              <li sit="1" class="free">7</li>
+              <li sit="1" class="free">8</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="w">9</li>
+              <li sit="1" class="free">10</li>
+              <li sit="1" class="m">11</li>
+              <li sit="1" class="free">12</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="m">13</li>
+              <li sit="1" class="free">14</li>
+              <li sit="1" class="free">15</li>
+              <li sit="1" class="free">16</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="free">17</li>
+              <li sit="1" class="free">18</li>
+              <li sit="1" class="free">19</li>
+              <li sit="1" class="free">20</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="free">21</li>
+              <li sit="1" class="free">22</li>
+              <li sit="1" class="free">23</li>
+              <li sit="1" class="free">24</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="free">25</li>
+              <li sit="1" class="free">26</li>
+              <li sit="1" class="free">27</li>
+              <li sit="1" class="free">28</li>
+            </div>
+            <div class="boxsit">
+              <li sit="1" class="free">29</li>
+              <li sit="30" class="free">30</li>
+              <li sit="31" class="free">31</li>
+              <li sit="32" class="free">32</li>
+            </div>
+          </ul>
+          <div
+            id="select-box-sit"
+            class="sit-hint"
+            style="
+              text-align: center;
+              color: white;
+              font-weight: bold;
+              display: none;
+            "
+          >
+            <span>صندلی شماره</span>
+            <span
+              class=""
+              style="
+                color: aqua;
+                font-size: 24px;
+                padding: 5px 10px;
+                border-radius: 3px;
+                background-color: #787878;
+              "
+              id="select-sit-number"
+              >5</span
+            >
+            <span>انتخاب شد</span>
+          </div>
+        </div>
+        <h5 style="text-align: right; padding: 20px 0; font-size: 20px"></h5>
+        <button id="cost-btn">محاسبه هزینه</button>
+        <h5 style="text-align: right; padding: 20px 0; font-size: 20px"></h5>
+        <div class="cost-group">
+          <span id="cost-value">0</span>
+          <span id="cost-title">هزینه کل</span>
+        </div>
+        <h5 style="text-align: right; padding: 20px 0; font-size: 20px"></h5>
+        <button onclick="onSumbit()" id="buyblit">خرید بلیت</button>
+      </form>
+    </div>
+
+    <script src="./js/core.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/ticket.js"></script>
+    <script>
+      const busSits = document.querySelectorAll("#bus li");
+      const selectBoxSit = document.getElementById("select-box-sit");
+      const selectSitNumber = document.getElementById("select-sit-number");
+      const costValue = document.getElementById("cost-value");
+      const costBtn = document.getElementById("cost-btn");
+      const sourceInput = document.getElementById("source");
+      const targetInput = document.getElementById("target");
+      const dateInput = document.getElementById("date");
+      const datetimeInput = document.getElementById("datetime");
+
+      busSits.forEach((bt) => bt.setAttribute("sit", bt.innerHTML.trim()));
+
+      busSits.forEach((blt) => {
+        blt.className = "free";
+        if (blt.classList.contains("free")) {
+          blt.addEventListener("click", (e) => {
+            busSits.forEach((b) => b.classList.remove("selected"));
+            blt.classList.add("selected");
+            selectBoxSit.style.display = "block";
+            selectSitNumber.innerHTML = blt.innerHTML;
+          });
+        }
+      });
+      costBtn.onclick = () => {
+        console.log(targetInput);
+        costValue.innerHTML = generateCost(targetInput.value);
+        // const sitnum = +selectSitNumber.innerHTML;
+        // const source = sourceInput.value;
+        // const target = targetInput.value;
+        // const date = dateInput.value;
+        // const datetime = datetimeInput.value.split("/").join("-");
+      };
+
+      const onSumbit = () => {
+        const sitnum = +selectSitNumber.innerHTML;
+        const source = sourceInput.value;
+        const target = targetInput.value;
+        const date = dateInput.value;
+        const datetime = datetimeInput.value;
+
+        const data = {
+          going_des: source,
+          back_des: target,
+          status: 1,
+          sitt_numb: +sitnum,
+          arrival_time: `${date} ${datetime}`,
+        };
+        var headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        headers.append("Authorization", "Bearer " + getToken());
+
+        fetch("https://bus.iran.liara.run/api/addticket", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers,
+          redirect: "follow",
+        })
+          .then((res) => res.json())
+          .then((resData) => {
+            alert("درخواست با موفقیت ثبت شد");
+          })
+          .catch((err) => {});
+      };
+
+      const loadSits = () => {
+        return;
+        const source = sourceInput.value;
+        const target = targetInput.value;
+        const date = dateInput.value;
+        const datetime = datetimeInput.value;
+        const data = {
+          source,
+          target,
+          date,
+          datetime,
+        };
+        fetch("/url", {
+          method: "POST",
+          body: data,
+          headers: {},
+        })
+          .then((res) => res.json())
+          .then((resData) => {
+            // returned data array of node {sitnumber,sex}
+          })
+          .catch((err) => {});
+      };
+    </script>
+  </body>
+</html>

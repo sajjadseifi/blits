@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/table.css" />
+    <link rel="stylesheet" href="styles/nav.css" />
+    <link rel="stylesheet" href="styles/nav.css" />
+    <style>
+      .cancel {
+        padding: 10px 20px;
+        border-radius: 6px;
+        background-color: crimson;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="site__header">
+        <h1 class="brand">
+          <img
+            style="margin: 0 10px"
+            src="./assets/images/bus-ico.png"
+            width="60"
+            height="auto"
+          />
+          خرید<span class="brand--point">بلیت</span>
+        </h1>
+        <nav>
+          <ul class="menu">
+            <li id="logout-nv" class="link-nav">
+              <a href="/logout.htm">خروج</a>
+            </li>
+            <li id="auth-nv" class="link-nav">
+              <a style="font-size: 20px" href="/login.htm">
+                <span style="color: crimson">ثبت نام</span>
+                <span style="padding: 0 10px">|</span>
+                <span style="color: chartreuse">ورود</span>
+              </a>
+            </li>
+            <li id="admin-panel-nv" class="link-nav">
+              <a href="/admin.htm">پنل</a>
+            </li>
+            <li><a class="active" href="/blits.htm">بلیت‌های من</a></li>
+            <li><a href="/index.htm">خانه</a></li>
+          </ul>
+        </nav>
+      </header>
+    </main>
+    <div class="table-wrapper">
+      <div class="table-container">
+        <table id="table">
+          <caption style="width: 100%"></caption>
+          <tbody>
+            <tr>
+              <th>مسیر رفت</th>
+              <th>مسیر برگشت</th>
+              <th>تاریخ</th>
+              <th>ساعت</th>
+              <th>شماره صندلی</th>
+              <th>هزینه کل</th>
+              <th>لغو</th>
+            </tr>
+            <!-- <tr>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+              <td data-cell="شماره صندلی">5</td>
+              <td data-cell="هزینه کل">35000ریال</td>
+              <td data-cell="لغو">
+                <span class="cancel">لغو سفر</span>
+              </td>
+            </tr>
+            <tr>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+              <td data-cell="شماره صندلی">5</td>
+              <td data-cell="هزینه کل">35000ریال</td>
+              <td data-cell="لغو">
+                <span>رد شده</span>
+              </td>
+            </tr>
+            <tr>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+              <td data-cell="شماره صندلی">5</td>
+              <td data-cell="هزینه کل">35000ریال</td>
+              <td data-cell="لغو">
+                <span class="cancel">لغو سفر</span>
+              </td>
+            </tr>
+            <tr>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+              <td data-cell="شماره صندلی">5</td>
+              <td data-cell="هزینه کل">35000ریال</td>
+              <td data-cell="لغو">
+                <span>رد شده</span>
+              </td>
+            </tr>
+            <tr>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+              <td data-cell="شماره صندلی">5</td>
+              <td data-cell="هزینه کل">35000ریال</td>
+              <td data-cell="لغو">
+                <span>رد شده</span>
+              </td>
+            </tr>
+            <tr>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+              <td data-cell="شماره صندلی">5</td>
+              <td data-cell="هزینه کل">35000ریال</td>
+              <td data-cell="لغو">
+                <span class="cancel">لغو سفر</span>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="./js/core.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/table.js"></script>
+    <script src="./js/ticket.js"></script>
+    <script>
+      const tableNode = document.getElementById("table");
+
+      const table = {
+        title: "بلیت های من",
+        columns: [
+          "مسیر رفت",
+          "مسیر برگشت",
+          "تاریخ",
+          "ساعت",
+          "شماره صندلی",
+          "هزینه کل",
+          "لغو",
+        ],
+        rows: [
+          // [
+          //   "معین",
+          //   "کرج",
+          //   "1402/01/02",
+          //   "17:30",
+          //   "5",
+          //   "35000ریال",
+          //   '<span onclick="onCancelTicket()" class="cancel">لغو سفر</span>',
+          // ],
+          // [
+          //   "معین",
+          //   "کرج",
+          //   "1402/01/02",
+          //   "17:30",
+          //   "5",
+          //   "35000ریال",
+          //   '<span onclick="onCancelTicket()" class="cancel">لغو سفر</span>',
+          // ],
+        ],
+      };
+
+      const onCancelTicket = (ticket_id) => {
+        console.log(ticket_id);
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + getToken());
+
+        var raw = JSON.stringify({
+          id: ticket_id,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch("https://bus.iran.liara.run/api/deactiveticket", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            alert("سفر لغو شد");
+            loadMyTickets();
+          })
+          .catch((error) => console.log("error", error));
+      };
+      const loadMyTickets = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + getToken());
+
+        var requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        fetch("https://bus.iran.liara.run/api/myticket", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.success != true) throw "sss";
+            table.rows = result.ticket.map((tk) => {
+              const source = tk.back_des;
+              const target = tk.going_des;
+              const sitnum = tk.sitt_numb;
+              const [date, dateTime] = tk.arrival_at.split(" ");
+              const d = date.split("-").join("/");
+              let dt = dateTime.split(":");
+              dt.pop();
+              dt = dt.join(":");
+              const cost = generateCost(target);
+              const status = tk.status
+                ? `<span onclick="onCancelTicket(${tk.id})" class="cancel">لغو سفر</span>`
+                : `<span>رد شده</span>`;
+              return [source, target, d, dt, sitnum, cost + "ریال", status];
+            });
+            renderTable(tableNode, table);
+          })
+          .catch((error) => console.log("error", error));
+      };
+      loadMyTickets();
+    </script>
+  </body>
+</html>

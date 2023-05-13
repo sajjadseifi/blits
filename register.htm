@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catche Blit</title>
+    <link rel="stylesheet" href="./styles/auth.css">
+  </head>
+  <body>
+
+<body>
+
+   <div class="header">
+   
+    
+   <div class="container">
+       <form onsubmit="return false"  class="form">
+           <h1>عضویت در سامانه</h1>
+            <img src="./assets/images/bus.png" width="200" height="auto">
+            <div class="input">
+               <label for="username" id="username_label" class="label">نام کاربری</label>
+               <input type="username" name="username" class="form-input" id="username" placeholder="نام کاربری خود را وارد کنید." required>
+           </div>
+           <div class="input">
+              <label for="email" id="email_label" class="label">ایمیل</label>
+              <input type="email" name="email" class="form-input" id="email" placeholder=" ایمیل خود را وارد کنید." required>
+           </div>
+           <div class="input">
+            <label for="firstname" id="firstname_label" class="label">نام</label>
+            <input type="firstname" name="firstname" class="form-input" id="firstname" placeholder="نام خود را وارد کنید." required>
+            </div>
+            <div class="input">
+                  <label for="lastname" id="lastname_label" class="label"> نام خانوادگی</label>
+                  <input type="lastname" name="lastname" class="form-input" id="lastname" placeholder="نام خانوادگی خود را وارد کنید." required>
+            </div>
+           <div class="input">
+               <label for="password" class="label" class="form-input">گذرواژه</label>
+               <input type="password" class="form-input" placeholder="گذرواژه خود را وارد کنید." id="password" required>
+           </div>
+           <div class="input">
+               <label for="password" class="label" class="form-input">جنسیت</label>
+               <span>مرد</span>
+               <input type="radio" name="sex" value="MAN" />
+               <span>زن</span>
+               <input type="radio" name="sex" value="WOMAN" />
+           </div>
+           <div class="btn-holder" >
+              <a class="home"  href="./index.htm">بازگشت به خانه</a>
+               <button  onclick="onSumbit()" style="background-color: rebeccapurple;" type="submit" id="submit_button">عضویت</button>
+            </div>
+           <div class="link">
+               <a  href="./login.htm">ورود به سامانه خرید بلیت اتوبوس</a>
+           </div>
+       </form>
+   </div>
+       
+       <!--Waves Container-->
+       <div>
+       <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+       viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+       <defs>
+       <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+       </defs>
+       <g class="parallax">
+       <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+       <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+       <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+       <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+       </g>
+       </svg>
+       </div>
+       <!--Waves end-->
+       
+       </div>
+       <script src="./js/core.js"></script>
+       <script>
+          const username = document.getElementById("username")
+          const email = document.getElementById("email")
+          const password = document.getElementById("password")
+          const firstname = document.getElementById("firstname")
+          const lastname = document.getElementById("lastname")
+          const onSumbit = () => {
+            const sex = Math.ceil(Math.random() * 2) % 2 ? "male":"female"
+            const data = {
+               email:email.value,
+               username:username.value,
+               password:username.value,
+               name:firstname.value,
+               lastname:lastname.value,
+               sex
+            }
+
+            var headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            fetch(routes.register, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers,
+                redirect: 'follow'
+
+            })
+            .then((res) => res.json())
+            .then((resData) => {
+              if(resData.success == "true"){
+                userRole(resData.user.id === 1)
+                setToken(resData.access_token)
+                window.location.href = './index.htm'
+              }
+              else {
+                throw new "not successed"
+              }
+            })
+            .catch((err) => {
+                alert("در ثبت نام مشکلی پیش امده است")
+            });
+          }
+       </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catche Blit</title>
+    <link rel="stylesheet" href="./styles/auth.css">
+  </head>
+  <body>
+
+<body>
+
+   <div class="header">
+   
+    
+   <div class="container">
+       <form onsubmit="return false"  class="form">
+           <h1>ورود به سامانه</h1>
+            <img src="./assets/images/bus.png" width="200" height="auto">
+           <div class="input">
+               <label for="email" id="email_label" class="label">ایمیل</label>
+               <input type="email" name="email" class="form-input" id="email" placeholder="ایمیل خود را وارد کنید." required>
+           </div>
+           <div class="input">
+               <label for="password" class="label" class="form-input">گذرواژه</label>
+               <input type="password" class="form-input" placeholder="گذرواژه خود را وارد کنید." id="password" required>
+           </div>
+           <div class="btn-holder" style="text-align: left; padding:20px 0;display: flex;">
+                <a class="home"  href="./index.htm">بازگشت به خانه</a>
+               <button onclick="onSumbit()" style="background-color: greenyellow;" type="submit" id="submit_button">ورود</button>
+            </div>
+           <div class="link">
+                <a   href="./register.htm">ثبت نام در سامانه</a>
+            </div>
+       </form>
+   </div>
+       
+       <!--Waves Container-->
+       <div>
+       <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+       viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+       <defs>
+       <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+       </defs>
+       <g class="parallax">
+       <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+       <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+       <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+       <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+       </g>
+       </svg>
+       </div>
+       <!--Waves end-->
+       
+       </div>
+       <script src="./js/core.js"></script>
+
+       <script>
+          const email = document.getElementById("email")
+          const password = document.getElementById("password")
+          const onSumbit = () => {
+            const data = {
+                email:email.value.trim(),
+                password:password.value.trim()
+            }
+            var headers = new Headers();
+            headers.append("Content-Type", "application/json");
+
+            fetch(routes.login, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers,
+                redirect: 'follow'
+
+            })
+            .then((res) => res.json())
+            .then((resData) => {
+                clearToken()
+                if(resData.success == "true"){
+                    userRole(data.email == "admin@gmail.com")
+                    setToken(resData.access_token)
+                    window.location.href = './index.htm'
+                } else {
+                    throw new "not successed"
+                }
+            })
+            .catch((err) => {
+                alert("در ورود مشکلی پیش امده است")
+            });
+          }
+       </script>
+  </body>
+</html>

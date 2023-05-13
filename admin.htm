@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/table.css" />
+    <link rel="stylesheet" href="styles/nav.css" />
+    <link rel="stylesheet" href="styles/nav.css" />
+  </head>
+  <body>
+    <main>
+      <header class="site__header">
+        <h1 class="brand">
+          <img
+            style="margin: 0 10px"
+            src="./assets/images/bus-ico.png"
+            width="60"
+            height="auto"
+          />
+          خرید<span class="brand--point">بلیت</span>
+        </h1>
+        <nav>
+          <ul class="menu">
+            <li id="logout-nv" class="link-nav">
+              <a href="/logout.htm">خروج</a>
+            </li>
+            <li id="auth-nv" class="link-nav">
+              <a style="font-size: 20px" href="/login.htm">
+                <span style="color: crimson">ثبت نام</span>
+                <span style="padding: 0 10px">|</span>
+                <span style="color: chartreuse">ورود</span>
+              </a>
+            </li>
+            <li id="admin-panel-nv" class="link-nav">
+              <a class="active" href="/admin.htm">پنل</a>
+            </li>
+            <li><a href="/blits.htm">بلیت‌های من</a></li>
+            <li><a href="/index.htm">خانه</a></li>
+          </ul>
+        </nav>
+      </header>
+    </main>
+    <div class="table-wrapper">
+      <div class="table-container">
+        <table id="table">
+          <caption style="width: 100%">
+            جدول بلیت ها
+          </caption>
+          <tbody>
+            <tr>
+              <th>نام</th>
+              <th>نام خانوادگی</th>
+              <th>مسیر رفت</th>
+              <th>مسیر برگشت</th>
+              <th>تاریخ</th>
+              <th>ساعت</th>
+            </tr>
+            <!-- <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr>
+            <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr>
+            <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr>
+            <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr>
+            <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr>
+            <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr>
+            <tr>
+              <td data-cell="نام">رضا</td>
+              <td data-cell="نام خانوادگی">کریمی</td>
+              <td data-cell="مسیر رفت">معین</td>
+              <td data-cell="مسیر برگشت">کرج</td>
+              <td data-cell="تاریخ">1402/01/02</td>
+              <td data-cell="ساعت">17:30</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="./js/core.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/table.js"></script>
+    <script>
+      const tableNode = document.getElementById("table");
+
+      const table = {
+        title: "بلیت ها",
+        columns: [
+          "ایدی کاربر",
+          "نام",
+          "نام خانوادگی",
+          "مسیر رفت",
+          "مسیر برگشت",
+          "تاریخ",
+          "ساعت",
+          "شماره صندلی",
+        ],
+        rows: [],
+      };
+
+      const loadMyTickets = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + getToken());
+
+        var requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        fetch("https://bus.iran.liara.run/api/adminPannel", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.success != true) throw "sss";
+            table.rows = result.ticket.map((tk) => {
+              const source = tk.back_des;
+              const target = tk.going_des;
+              const sitnum = tk.sitt_numb;
+              const [date, dateTime] = tk.arrival_at.split(" ");
+              const d = date.split("-").join("/");
+              let dt = dateTime.split(":");
+              dt.pop();
+              dt = dt.join(":");
+
+              return [
+                tk.user_id,
+                "نام",
+                "نام خانوادگی",
+                source,
+                target,
+                d,
+                dt,
+                sitnum,
+              ];
+            });
+            renderTable(tableNode, table);
+          })
+          .catch((error) => console.log("error", error));
+      };
+      loadMyTickets();
+    </script>
+  </body>
+</html>
