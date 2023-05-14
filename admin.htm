@@ -131,8 +131,7 @@
           "ایدی کاربر",
           "نام",
           "نام خانوادگی",
-          "مسیر رفت",
-          "مسیر برگشت",
+          "مقصد",
           "تاریخ",
           "ساعت",
           "شماره صندلی",
@@ -167,7 +166,7 @@
               dt.pop();
               dt = dt.join(":");
 
-              return [tk.user_id, fname, lname, source, target, d, dt, sitnum];
+              return [tk.user_id, fname, lname, target, d, dt, sitnum];
             });
             renderTable(tableNode, table);
           })
