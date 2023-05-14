@@ -319,7 +319,6 @@
           .then((response) => response.json())
           .then((result) => {
             console.log(result.ticket);
-            if()
             sit_render(result.ticket || []);
           })
           .catch((error) => console.log("error", error));
