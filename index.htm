@@ -58,7 +58,7 @@
           ایستگاه را انتخاب کنید
         </h5>
         <div class="select">
-          <select onchange="loadSits()" name="format" id="target">
+          <select name="format" id="target">
             <option selected value="استاد معین">استاد معین</option>
             <option value="شرق">شرق</option>
             <option value="یافت اباد">یافت اباد</option>
@@ -231,6 +231,16 @@
           sitnum: 31,
         },
       ];
+      const sit_render = (sits = []) => {
+        sits.forEach((st) => {
+          cm = st.sex == "male" ? "m" : "w";
+          const sitnode = document.querySelector(`li[sit='${st.sit}']`);
+          if (sitnode) {
+            sitnode.classList.add(cm);
+            sitnode.removeEventListener("click", () => {});
+          }
+        });
+      };
       busSits.forEach((bt) => bt.setAttribute("sit", bt.innerHTML.trim()));
 
       busSits.forEach((blt) => {
@@ -309,21 +319,11 @@
 
         fetch("https://bus.iran.liara.run/api/getsittnumber", requestOptions)
           .then((response) => response.text())
-          .then((result) => console.log(result))
+          .then((result) => {
+            sit_render(result.ticket || []);
+          })
           .catch((error) => console.log("error", error));
       };
-      const sit_render = () => {
-        sits.forEach((st) => {
-          cm = st.sex == "male" ? "m" : "w";
-          const sitnode = document.querySelector(`li[sit='${st.sitnum}']`);
-          if (sitnode) {
-            sitnode.classList.add(cm);
-            sitnode.removeEventListener("click", () => {});
-          }
-        });
-      };
-      sit_render();
-      // const checkCanSit = () => {};
     </script>
   </body>
 </html>
