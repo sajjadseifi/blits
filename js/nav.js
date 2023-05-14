@@ -24,6 +24,7 @@ const menuItem = Array.from(menu.querySelectorAll("li a"));
 const adminlink = document.getElementById("admin-panel-nv")
 const logoutlink = document.getElementById("logout-nv")
 const authlink = document.getElementById("auth-nv")
+const mytick = document.getElementById("mytick-nv")
 
 const navVisible = () => {
    logoutlink.style.display = 'none'

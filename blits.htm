@@ -138,6 +138,7 @@
     </div>
 
     <script src="./js/core.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/nav.js"></script>
     <script src="./js/table.js"></script>
     <script src="./js/ticket.js"></script>
@@ -230,7 +231,15 @@
               const status = tk.status
                 ? `<span onclick="onCancelTicket(${tk.id})" class="cancel">لغو سفر</span>`
                 : `<span>رد شده</span>`;
-              return [source, target, d, dt, sitnum, cost + "ریال", status];
+              return [
+                source,
+                target,
+                d,
+                dt,
+                sitnum,
+                generateCost(cost) + "ریال",
+                status,
+              ];
             });
             renderTable(tableNode, table);
           })
