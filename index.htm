@@ -232,6 +232,7 @@
         },
       ];
       const sit_render = (sits = []) => {
+        busSits.forEach((blt) => (blt.className = "free"));
         sits.forEach((st) => {
           cm = st.sex == "male" ? "m" : "w";
           const sitnode = document.querySelector(`li[sit='${st.sit}']`);
@@ -301,17 +302,14 @@
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append(
-          "Authorization",
-          "Bearer 29|dKReLNdBoNcuGNfJJTKYfgjZAimV2myngYIlyKYa"
-        );
+        myHeaders.append("Authorization", "Bearer " + getToken());
 
         var raw = JSON.stringify({
           time: `${date} ${datetime}`,
         });
 
         var requestOptions = {
-          method: "GET",
+          method: "POST",
           headers: myHeaders,
           body: raw,
           redirect: "follow",
