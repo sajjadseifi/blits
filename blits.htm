@@ -147,15 +147,7 @@
 
       const table = {
         title: "بلیت های من",
-        columns: [
-          "مسیر رفت",
-          "مسیر برگشت",
-          "تاریخ",
-          "ساعت",
-          "شماره صندلی",
-          "هزینه کل",
-          "لغو",
-        ],
+        columns: ["مقصد", "تاریخ", "ساعت", "شماره صندلی", "هزینه کل", "لغو"],
         rows: [
           // [
           //   "معین",
@@ -232,7 +224,6 @@
                 ? `<span onclick="onCancelTicket(${tk.id})" class="cancel">لغو سفر</span>`
                 : `<span>رد شده</span>`;
               return [
-                source,
                 target,
                 d,
                 dt,
